@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\GoogleUser;
 use Socialite;
 use Auth;
 
@@ -18,7 +18,7 @@ class OAuthLoginController extends Controller
     public function authGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->user();
-        $user = User::firstOrNew(['email' => $googleUser->email]);
+        $user = GoogleUser::firstOrNew(['email' => $googleUser->email]);
         if (!$user->exists) {
             $user['email'] = $googleUser->email;
             $user['google_id'] = $googleUser->getId();
@@ -26,6 +26,6 @@ class OAuthLoginController extends Controller
             $user->save();
         }
         Auth::login($user);
-        return redirect()->route('top');
+        return redirect()->route('login');
     }
 }
