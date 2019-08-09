@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        #$this->middleware('auth');
     }
 
     /**
@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (! Auth::check()) {
+            return redirect('/login')->with('message', 'Home画面へのアクセスにはログインが必要です。');
+        }
         $user = Auth::user();
         return view('home', compact('user'));
     }

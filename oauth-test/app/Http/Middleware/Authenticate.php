@@ -16,6 +16,8 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             return route('login');
+            #return redirect('/login');
+                #->with('message', 'Home画面へのアクセスにはログインが必要です。');
         }
     }
 }
