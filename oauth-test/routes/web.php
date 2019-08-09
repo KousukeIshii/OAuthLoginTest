@@ -18,6 +18,6 @@ Route::get('/', function () {
 Route::get('/auth/{service}', 'OAuthLoginController@getGoogleAuth')->where('service', 'google');
 Route::get('/auth/callback/google', 'OAuthLoginController@authGoogleCallback');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
