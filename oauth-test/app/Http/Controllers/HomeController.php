@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         if (! Auth::check()) {
-            return redirect('/login')->with('message', 'Home画面へのアクセスにはログインが必要です。');
+            return view('home-login-error');
         }
         $user = Auth::user();
         return view('home', compact('user'));
